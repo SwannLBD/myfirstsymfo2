@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+          {% for tel in tels %}
+                  <li>{{ tel.marque }}</li>
+                  <li>{{ tel.type }}</li>
+                  <li>{{ tel.taille }}</li> <br>
+          {% endfor %}
+{% endblock %}

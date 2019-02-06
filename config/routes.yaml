@@ -1,0 +1,32 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+hello_index:
+    path: /hello/{prenom}/{age}
+    controller: App\Controller\HelloController::index_perso
+    requirements:
+      prenom: '[A-Za-z]+'
+      age: '[0-9]+'
+
+hello_error_index:
+    path: /hello/{prenom}/
+    controller: App\Controller\HelloController::index_perso_error
+    requirements:
+      prenom: '[A-Za-z]+'
+      age: '[0-9]+'
+
+Telephone_new:
+    path: /telephone/new/{marque}/{type}/{taille}/
+    controller: App\Controller\TelephoneController::new_perso
+
+Telephone_modify:
+    path: /telephone/modify/{id}/{marque}/{type}/{taille}/
+    controller: App\Controller\TelephoneController::modify_perso
+
+Telephone_remove:
+    path: /telephone/remove/{id}/
+    controller: App\Controller\TelephoneController::remove_perso
+
+Telephone_index:
+    path: /telephone/
+    controller: App\Controller\TelephoneController::index
