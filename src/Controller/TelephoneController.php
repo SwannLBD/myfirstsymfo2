@@ -86,6 +86,29 @@ class TelephoneController extends Controller
 
     }
 
+    public function tri() {
+       $repo = $this->getDoctrine()
+                    ->getRepository(Telephone::class);
+       $tels = $repo->findBiggerSizeThan(6.2);
+
+     return $this->render('tri.html.twig', array(
+         "tels" => $tels,
+     ));
+   }
+
+   public function triParMarque($marque) {
+      $repo = $this->getDoctrine()
+                   ->getRepository(Telephone::class);
+      $tels = $repo->findBiggerMarqueThan($marque);
+
+    return $this->render('triParMarque.html.twig', array(
+        "marque" => $marque,
+        "tels" => $tels,
+    ));
+  }
+
+
+
 
 
 }

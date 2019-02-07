@@ -19,6 +19,39 @@ class TelephoneRepository extends ServiceEntityRepository
         parent::__construct($registry, Telephone::class);
     }
 
+          // dans le repository
+      public function findBiggerSizeThan($value)
+      {
+                  // récupération de l'em
+          $em = $this->getEntityManager();
+
+          // création de la requête
+          $query = $em->createQuery(
+              'SELECT t
+              FROM App\Entity\Telephone t
+              WHERE t.taille > :size'
+          )->setParameter('size', $value);
+
+          // exécution et renvoie de la requête sous la forme de tableau d'entités
+          return $query->execute();
+      }
+
+      public function findBiggerMarqueThan($value)
+      {
+                  // récupération de l'em
+          $em = $this->getEntityManager();
+
+          // création de la requête
+          $query = $em->createQuery(
+              'SELECT t
+              FROM App\Entity\Telephone t
+              WHERE t.marque = :marque'
+          )->setParameter('marque', $value);
+
+          // exécution et renvoie de la requête sous la forme de tableau d'entités
+          return $query->execute();
+      }
+
 
     // /**
     //  * @return Telephone[] Returns an array of Telephone objects

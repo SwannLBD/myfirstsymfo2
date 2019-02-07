@@ -30,3 +30,11 @@ Telephone_remove:
 Telephone_index:
     path: /telephone/
     controller: App\Controller\TelephoneController::index
+
+Telephone_tri:
+    path: /telephone/tri
+    controller: App\Controller\TelephoneController::tri
+
+Telephone_triParMarque:
+    path: /telephone/tri/{marque}
+    controller: App\Controller\TelephoneController::triParMarque
