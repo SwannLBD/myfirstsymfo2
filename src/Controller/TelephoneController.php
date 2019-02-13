@@ -99,13 +99,15 @@ class TelephoneController extends Controller
    public function triParMarque($marque) {
       $repo = $this->getDoctrine()
                    ->getRepository(Telephone::class);
-      $tels = $repo->findBiggerMarqueThan($marque);
+      $tels = $repo->findMarque($marque);
 
     return $this->render('triParMarque.html.twig', array(
         "marque" => $marque,
         "tels" => $tels,
     ));
   }
+
+  
 
 
 

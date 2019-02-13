@@ -36,21 +36,24 @@ class TelephoneRepository extends ServiceEntityRepository
           return $query->execute();
       }
 
-      public function findBiggerMarqueThan($value)
+      public function findMarque($value)
       {
                   // récupération de l'em
           $em = $this->getEntityManager();
 
           // création de la requête
           $query = $em->createQuery(
-              'SELECT t
-              FROM App\Entity\Telephone t
-              WHERE t.marque = :marque'
-          )->setParameter('marque', $value);
+            'SELECT t
+               FROM App\Entity\Telephone t
+               WHERE t.marque LIKE :tri
+               ORDER BY t.marque ASC'
+       )->setParameter('tri','%'.$value.'%');
 
           // exécution et renvoie de la requête sous la forme de tableau d'entités
           return $query->execute();
       }
+
+
 
 
     // /**
