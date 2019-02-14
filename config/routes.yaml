@@ -38,3 +38,7 @@ Telephone_tri:
 Telephone_triParMarque:
     path: /telephone/tri/{marque}
     controller: App\Controller\TelephoneController::triParMarque
+
+Telephone_triParMarqueQb:
+    path: /telephone/triQb/{marque}
+    controller: App\Controller\TelephoneController::triParMarqueQb

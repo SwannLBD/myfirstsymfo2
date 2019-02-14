@@ -53,6 +53,24 @@ class TelephoneRepository extends ServiceEntityRepository
           return $query->execute();
       }
 
+      public function triParMarqueQb($value)
+      {
+    // on travaille sur l'entité Telephone (le Repo est associé à l'entité Telephone)
+    // 't' est l'alias que nous pouvons utiliser par la suite.
+    $qb = $this->createQueryBuilder('t');
+
+    // ajout d'une clause 'Where'
+    // FROM et SELECT ne sont pas indispensable vu que le qb a été construit en lien avec l'entité Telephone
+    $qb->andWhere('t.marque = :marque')
+        ->setParameter('marque', $value);
+
+    // récupération de la requête
+    $query = $qb->getQuery();
+
+    // exécution et renvoie du résultat
+    return $query->execute();
+    }
+
 
 
 

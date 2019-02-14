@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+{% for tels in tels %}
+    <p>Votre téléphone {{tels.marque}} {{tels.type}} de {{tels.taille}} pouces fait parti des marques correspondant à votre recherche! (QueryBuilder)</p>
+{% endfor %}
+
+{% endblock %}
