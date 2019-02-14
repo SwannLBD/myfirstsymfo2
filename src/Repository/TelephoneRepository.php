@@ -57,19 +57,51 @@ class TelephoneRepository extends ServiceEntityRepository
       {
     // on travaille sur l'entité Telephone (le Repo est associé à l'entité Telephone)
     // 't' est l'alias que nous pouvons utiliser par la suite.
-    $qb = $this->createQueryBuilder('t');
+          $qb = $this->createQueryBuilder('t');
 
-    // ajout d'une clause 'Where'
-    // FROM et SELECT ne sont pas indispensable vu que le qb a été construit en lien avec l'entité Telephone
-    $qb->andWhere('t.marque = :marque')
-        ->setParameter('marque', $value);
+          // ajout d'une clause 'Where'
+          // FROM et SELECT ne sont pas indispensable vu que le qb a été construit en lien avec l'entité Telephone
+          $qb->andWhere('t.marque = :marque')
+              ->setParameter('marque', $value);
 
-    // récupération de la requête
-    $query = $qb->getQuery();
+          // récupération de la requête
+          $query = $qb->getQuery();
 
-    // exécution et renvoie du résultat
-    return $query->execute();
-    }
+          // exécution et renvoie du résultat
+          return $query->execute();
+        }
+
+        public function findMobile($marque, $type)
+        {
+      // on travaille sur l'entité Telephone (le Repo est associé à l'entité Telephone)
+      // 't' est l'alias que nous pouvons utiliser par la suite.
+            $qb = $this->createQueryBuilder('t');
+
+            // ajout d'une clause 'Where'
+            // FROM et SELECT ne sont pas indispensable vu que le qb a été construit en lien avec l'entité Telephone
+
+            if($type == 0){
+               $qb->andWhere('t.marque = :marque')
+                   ->setParameter('marque', $marque);
+           }
+           else if($marque == 0){
+               $qb->andWhere('t.type = :type')
+                   ->setParameter('type', $type);
+           }
+           else{
+                $qb->andWhere('t.marque = :marque')
+                   ->setParameter('marque', $marque);
+               $qb->andWhere('t.type = :type')
+                   ->setParameter('type', $type);
+           }
+
+            // récupération de la requête
+            $query = $qb->getQuery();
+
+            // exécution et renvoie du résultat
+            return $query->execute();
+        }
+
 
 
 

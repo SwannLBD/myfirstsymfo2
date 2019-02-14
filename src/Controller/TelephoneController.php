@@ -107,13 +107,14 @@ class TelephoneController extends Controller
     ));
   }
 
-  public function triParMarqueQb($marque) {
+  public function triParMarqueTypeQb($marque, $type) {
      $repo = $this->getDoctrine()
                   ->getRepository(Telephone::class);
-     $tels = $repo->findMarque($marque);
+     $tels = $repo->findMobile($marque, $type);
 
-   return $this->render('triParMarqueQb.html.twig', array(
+   return $this->render('triParMarqueTypeQb.html.twig', array(
        "marque" => $marque,
+       "type" => $type,
        "tels" => $tels,
    ));
  }
