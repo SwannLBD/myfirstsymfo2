@@ -7,7 +7,26 @@ use Symfony\Component\HttpFoundation\Response;
 // la classe Controller est la classe mère de tous les controllers
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+
+// use utilisé mais non nécessaire à présent ! Voir TelephoneType
+// use Symfony\Component\Form\Extension\Core\Type\TextType;
+//
+// use Symfony\Component\Form\Extension\Core\Type\NumberType;
+//
+// use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+use Symfony\Component\HttpFoundation\Request;
+
+
 use App\Entity\Telephone;
+
+use App\Form\TelephoneType;
+
+
+
+
+
+
 
 // notre controller doit forcément hériter de la classe Controller ("use" ci-dessus)
 // Le nom de la classe doit être exactement le même que celui du fichier
@@ -72,8 +91,7 @@ class TelephoneController extends Controller
       ));
     }
 
-    public function index()
-    {
+    public function index() {
             // création du repository en lui précisant l'entité associée
       $repo = $this->getDoctrine()
               ->getRepository(Telephone::class);
@@ -119,11 +137,39 @@ class TelephoneController extends Controller
    ));
  }
 
+ public function new(Request $request)
+ {
+     $tel = new Telephone();
 
+     // Nous précisons ici que nous voulons utiliser `TelephoneType` et hydrater $tel
+     $form = $this->createForm(TelephoneType::class, $tel);
 
+     // nous récupérons ici les informations du formulaire validée
+     // c'est-à-dire l'équivalent du $_POST
+     // ... et ce, grâce à l'objet $request
+     // qui représente les informations sur la requête HTTP reçue (voir l'explication après le code)
+     $form->handleRequest($request);
 
+     // Si nous venons de valider le formulaire et s'il est valide (problèmes de type, etc)
+     if ($form->isSubmitted() && $form->isValid()) {
+         // nous enregistrons directement l'objet $tel !
+         // En effet, il a été hydraté grâce au paramètre donné à la méthode createFormBuilder !
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($tel);
+         $em->flush();
 
+         // nous redirigeons l'utilisateur vers la route /telephone/
+         // nous utilisons ici l'identifiant de la route, créé dans le fichier yaml
+         // (il est peut-être différent pour vous, adaptez en conséquence)
+         // extrèmement pratique : si nous devons changer l'url en elle-même,
+         // nous n'avons pas à changer nos contrôleurs, mais juste les fichiers de configurations yaml
+         return $this->redirectToRoute('telephone_new');
+     }
 
+     return $this->render('telephone/new.html.twig', array(
+         'form' => $form->createView(),
+     ));
+ }
 
 
 

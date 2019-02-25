@@ -15,34 +15,38 @@ hello_error_index:
       prenom: '[A-Za-z]+'
       age: '[0-9]+'
 
-Telephone_new:
+telephone_newBdd:
     path: /telephone/new/{marque}/{type}/{taille}/
     controller: App\Controller\TelephoneController::new_perso
 
-Telephone_modify:
+telephone_modifyBdd:
     path: /telephone/modify/{id}/{marque}/{type}/{taille}/
     controller: App\Controller\TelephoneController::modify_perso
 
-Telephone_remove:
+telephone_remove:
     path: /telephone/remove/{id}/
     controller: App\Controller\TelephoneController::remove_perso
 
-Telephone_index:
+telephone_index:
     path: /telephone/
     controller: App\Controller\TelephoneController::index
 
-Telephone_tri:
+telephone_tri:
     path: /telephone/tri
     controller: App\Controller\TelephoneController::tri
 
-Telephone_triParMarque:
+telephone_triParMarque:
     path: /telephone/tri/{marque}
     controller: App\Controller\TelephoneController::triParMarque
 
-Telephone_triParMarqueQb:
+telephone_triParMarqueQb:
     path: /telephone/triQb/{marque}
     controller: App\Controller\TelephoneController::triParMarqueQb
 
-Telephone_triParMarqueTypeQb:
+telephone_triParMarqueTypeQb:
     path: /telephone/triQb/{marque}/{type}
     controller: App\Controller\TelephoneController::triParMarqueTypeQb
+
+telephone_new:
+    path: /telephone/new
+    controller: App\Controller\TelephoneController::new
